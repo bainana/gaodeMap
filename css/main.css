@@ -10,6 +10,8 @@ body{
 .header{
     width: 100%;
     height: 50px;
+    text-align: center;
+    line-height: 50px;
     background-color: #0075c7;
     position: absolute;
     color: #fff;
@@ -23,11 +25,12 @@ body{
 }
 
 .menu{
-    width: 20%;
+    width: 220px;
     float: left;
     border-right: 1px solid #e9e9e9;
     overflow-y: scroll;
     height: 100%;
+    background: #fff;
 }
 .menu .search{
     margin: 10px;
@@ -47,14 +50,34 @@ body{
     border: 0;
     color: #fff;
 }
+.menu ul{
+    margin: 0;
+    padding: 0 10px;
+}
 .menu li{
     line-height: 30px;
     font-size: 12px;
+    padding-left: 10px;
+    list-style: none;
+    cursor: pointer;
+}
+.menu li:hover{
+    background-color: rgba(0,155,255,0.8);
+    color: #fff;
 }
 .main{
     border-left: 1px solid #e9e9e9;
     height: 100%;
     position: relative;
+}
+#menu-btn{
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+#menu-btn img{
+    width:30px;
+    cursor: pointer;
 }
 #panel {
     position: fixed;
@@ -89,4 +112,16 @@ body{
     color: #666666;
     line-height: 23px;
 }
-
+@media screen and (max-width: 800px) {
+    body{
+        font-size: 12px;
+    }
+    .menu{
+        display: none;
+    }
+    .menu{
+        position: absolute;
+        z-index: 9999;
+        width: 230px;
+    }
+}

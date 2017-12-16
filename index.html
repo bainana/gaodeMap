@@ -6,23 +6,26 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
-<div class="header">国家图书馆附近大学分布图</div>
+<div class="header">
+    <span id="menu-btn"><img src="img/Category.png" /></span>
+    在国家图书馆附近搜索你需要找的地方
+</div>
 <div class="wrap">
-    <div class="menu">
+    <div class="menu" id="sidebar">
         <div class="search">
-            <input type="text" id="text" data-bind="value: keyword"/>
+            <input type="text" id="text" data-bind="value: keyword" placeholder="请输入关键字" />
             <button data-bind="click: search">搜索</button>
         </div>
         <ul data-bind="foreach: lists">
-            <li data-bind="text: name"></li>
+            <li data-bind="text: name, click: $parent.showdedetail"></li>
         </ul>
     </div>
     <div class="main" id='container'></div>
-    <div id="panel"></div>
 </div>
 <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.2&key=1a512d85b789b639b9451b4a37654bdb&plugin=AMap.PlaceSearch"></script>
 <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
 <script type="text/javascript" src="js/knockout.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="js/config.js"></script>
 </body>
 </html>
