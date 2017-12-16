@@ -72,10 +72,18 @@ var viewModel = function() {
                 marker.setAnimation('AMAP_ANIMATION_DROP');
                 infoWindow.setContent(marker.content);
                 infoWindow.open(map, marker.getPosition());
+                setTimeout(function(){
+                    infoWindow.close();//3秒后自动关闭信息窗体
+                },3000);
+            } else {
+              marker = new AMap.Marker({
+                map: map,
+                position: [data.location.lng,data.location.lat],
+              });
             }
         });
     }
-};
+}
 setTimeout(function(){
     ko.applyBindings(new viewModel());//请求需要时间，延迟渲染
 },800);
