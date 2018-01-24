@@ -47,8 +47,8 @@ var viewModel = function() {
     self.lists = ko.observableArray(maplist);// 用 maplist 来初始化
     self.keyword = ko.observable();
     self.search = function() {
+        alert(2);
         keywords = self.keyword();
-        console.log(keywords)
         if (keywords !== '' && keywords !== undefined) {
             map.remove(markers);//先移除markers
             getPositions();//根据关键字去请求
@@ -58,57 +58,31 @@ var viewModel = function() {
         }
     }
     self.showdedetail = function(data,e){
-        markers.forEach(function(marker,index){
-            if (marker.title === data.name){
-                console.log(marker);
-                marker = new AMap.Marker({
-                    map: map,
-                    position: [data.position[0],data.position[1]]
-                });
-                //设置信息窗体内容
-                marker.title = data.name;
-                marker.content = '<div class="info-title">' + data.name + '</div><div class="info-content">'+
-                '地址：' + data.address;
-                //点击marker显示信息窗体
-                marker.setAnimation('AMAP_ANIMATION_DROP');
-                infoWindow.setContent(marker.content);
-                infoWindow.open(map, marker.getPosition());
-                setTimeout(function(){
-                    infoWindow.close();//3秒后自动关闭信息窗体
-                },3000);
-            } else {
-              marker = new AMap.Marker({
-                map: map,
-                position: [data.position[0],data.position[1]],
-              });
-            }
-        });
-        // markers.filter(function(marker) {
-        //     console.log(marker.title)
-        //     if (marker.title === data.name){
-
-        //         marker = new AMap.Marker({
-        //             map: map,
-        //             position: [data.position[0],data.position[1]]
-        //         });
-        //         //设置信息窗体内容
-        //         marker.title = data.name;
-        //         marker.content = '<div class="info-title">' + data.name + '</div><div class="info-content">'+
-        //         '电话：' + data.tel + '<br/>'+ '地址：' + data.address;
-        //         //点击marker显示信息窗体
-        //         marker.setAnimation('AMAP_ANIMATION_DROP');
-        //         infoWindow.setContent(marker.content);
-        //         infoWindow.open(map, marker.getPosition());
-        //         setTimeout(function(){
-        //             infoWindow.close();//3秒后自动关闭信息窗体
-        //         },3000);
-        //     } else {
-        //       marker = new AMap.Marker({
-        //         map: map,
-        //         position: [data.location.lng,data.location.lat],
-        //       });
-        //     }
-        // });
+        alert(1);
+    //     markers.filter(function(marker) {
+    //         if (marker.title === data.name){
+    //             marker = new AMap.Marker({
+    //                 map: map,
+    //                 position: [data.location.lng,data.location.lat]
+    //             });
+    //             //设置信息窗体内容
+    //             marker.title = data.name;
+    //             marker.content = '<div class="info-title">' + data.name + '</div><div class="info-content">'+
+    //             '电话：' + data.tel + '<br/>'+ '地址：' + data.address;
+    //             //点击marker显示信息窗体
+    //             marker.setAnimation('AMAP_ANIMATION_DROP');
+    //             infoWindow.setContent(marker.content);
+    //             infoWindow.open(map, marker.getPosition());
+    //             setTimeout(function(){
+    //                 infoWindow.close();//3秒后自动关闭信息窗体
+    //             },3000);
+    //         } else {
+    //           marker = new AMap.Marker({
+    //             map: map,
+    //             position: [data.location.lng,data.location.lat],
+    //           });
+    //         }
+    //     });
     }
 }
 setTimeout(function(){
