@@ -7,17 +7,17 @@
 </head>
 <body>
 <div class="header">
-    <span id="menu-btn"><img src="img/Category.png" /></span>
+    <span id="menu-btn" data-bind="click: buttonclick()"><img src="img/Category.png" /></span>
     在国家图书馆附近搜索你需要找的地方
+    <span class="city" id="city"></span>
 </div>
 <div class="wrap">
-    <div class="menu" id="sidebar">
+    <div class="menu" id="sidebar" data-bind="visible: showmenu">
         <div class="search">
-            <input type="text" id="text" data-bind="value: keyword" placeholder="请输入关键字" />
-            <!-- <button data-bind="click: search">搜索</button> -->
+            <input type="text" id="text" data-bind="value: keyword, valueUpdate: 'afterkeydown'" placeholder="请输入关键字" />
         </div>
         <ul data-bind="foreach: lists">
-            <li data-bind="text: name, click: $parent.showdedetail"></li>
+            <li data-bind="text: title,visible:$root.filter(id,title,$root.keyword), click: $root.showdetail(id)"></li>
         </ul>
     </div>
     <div class="main" id='container'></div>
@@ -26,6 +26,6 @@
 <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
 <script type="text/javascript" src="js/knockout.js"></script>
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="js/config.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

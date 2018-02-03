@@ -20,10 +20,10 @@ AMap.service('AMap.PlaceSearch',function(){//回调函数
     });
     // 使用placeSearch对象调用关键字搜索的功能
 
-    getPositions();
+    getPositions(maplist);
 });
 
-function getPositions(){
+function getPositions(maplist){
     maplist.forEach(function(data){
         marker = new AMap.Marker({
             map: map,
@@ -50,17 +50,20 @@ var viewModel = function() {
         keywords = self.keyword();
         console.log(keywords)
         if (keywords !== '' && keywords !== undefined) {
+          // 借用数组的方法 filter 来过滤返回需要的结果
+            var filteredMarkers = self.lists().filter(function(marker) {
+                return marker.name.indexOf(keywords) > -1;
+            });
             map.remove(markers);//先移除markers
-            getPositions();//根据关键字去请求
-            setTimeout(function(){
-                self.lists(maplist);//请求需要时间，延迟渲染
-            },800)
+            self.lists(filteredMarkers); // 设置为过滤后的数组
+            getPositions(filteredMarkers);//渲染标记
+        } else {
+          self.lists(markers); // 当没有输入时，恢复为初始的所有列表项
         }
     }
     self.showdedetail = function(data,e){
         markers.forEach(function(marker,index){
             if (marker.title === data.name){
-                console.log(marker);
                 marker = new AMap.Marker({
                     map: map,
                     position: [data.position[0],data.position[1]]
@@ -83,32 +86,6 @@ var viewModel = function() {
               });
             }
         });
-        // markers.filter(function(marker) {
-        //     console.log(marker.title)
-        //     if (marker.title === data.name){
-
-        //         marker = new AMap.Marker({
-        //             map: map,
-        //             position: [data.position[0],data.position[1]]
-        //         });
-        //         //设置信息窗体内容
-        //         marker.title = data.name;
-        //         marker.content = '<div class="info-title">' + data.name + '</div><div class="info-content">'+
-        //         '电话：' + data.tel + '<br/>'+ '地址：' + data.address;
-        //         //点击marker显示信息窗体
-        //         marker.setAnimation('AMAP_ANIMATION_DROP');
-        //         infoWindow.setContent(marker.content);
-        //         infoWindow.open(map, marker.getPosition());
-        //         setTimeout(function(){
-        //             infoWindow.close();//3秒后自动关闭信息窗体
-        //         },3000);
-        //     } else {
-        //       marker = new AMap.Marker({
-        //         map: map,
-        //         position: [data.location.lng,data.location.lat],
-        //       });
-        //     }
-        // });
     }
 }
 setTimeout(function(){

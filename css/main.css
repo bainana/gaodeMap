@@ -16,6 +16,9 @@ body{
     position: absolute;
     color: #fff;
 }
+.header .city{
+    color: #ccc;
+}
 .wrap{
     position: absolute;
     width: 100%;
